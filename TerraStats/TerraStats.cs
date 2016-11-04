@@ -65,7 +65,6 @@ namespace TerraStats
             switch (e.MsgID)
             {
                 case PacketTypes.PlayerKillMe:
-                    #region playerdmg
                     using (var reader = new BinaryReader(new MemoryStream(e.Msg.readBuffer, e.Index, e.Length)))
                     {
                         byte victimid = reader.ReadByte();
@@ -100,7 +99,6 @@ namespace TerraStats
                         } 
                     }
                     break;
-                    #endregion
                 case PacketTypes.PlayerDamage:
                     using (var reader = new BinaryReader(new MemoryStream(e.Msg.readBuffer, e.Index, e.Length)))
                     {
@@ -197,7 +195,7 @@ namespace TerraStats
 
         private void getStats(CommandArgs args)
         {
-            TSPlayer ply = TShock.Players[args.Player.Index];
+            TSPlayer ply = args.Player;
 
             if (ply == null)
                 return;
@@ -222,22 +220,55 @@ namespace TerraStats
             }
             else
             {
-                foreach (TUser user in DbManager.Users)
+                List<TSPlayer> fplayer = TShock.Utils.FindPlayer(args.Parameters[0]);
+
+                bool isinDatabase = false;
+                
+                if (fplayer.Count == 0)
                 {
-                    List<TSPlayer> fplayer = TShock.Utils.FindPlayer(args.Parameters[0]);
-                    if(fplayer == null)
+                    foreach (TUser user in DbManager.Users)
+                    {
+                        if (user.Name == args.Parameters[0])
+                        {
+                            isinDatabase = true;
+                        }
+                    }
+
+                    if (!isinDatabase)
                     {
                         ply.SendErrorMessage("[TerraPvP] Player not found.");
                         return;
                     }
-                    if (user.UserID == fplayer[0].User.ID)
+                }
+
+                foreach (TUser user in DbManager.Users)
+                {
+                    if (!isinDatabase)
                     {
-                        ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(79, 14, 102));
-                        ply.SendMessage("MobKills: " + user.MobKills, new Color(93, 18, 121));
-                        ply.SendMessage("PvPKills: " + user.PvPKills, new Color(104, 28, 131));
-                        ply.SendMessage("Deaths: " + user.Deaths, new Color(116, 35, 145));
-                        ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(124, 32, 158));
-                        ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(137, 33, 175));
+                        if (user.UserID == fplayer[0].User.ID)
+                        {
+                            ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(79, 14, 102));
+                            ply.SendMessage("MobKills: " + user.MobKills, new Color(93, 18, 121));
+                            ply.SendMessage("PvPKills: " + user.PvPKills, new Color(104, 28, 131));
+                            ply.SendMessage("Deaths: " + user.Deaths, new Color(116, 35, 145));
+                            ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(124, 32, 158));
+                            ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(137, 33, 175));
+                            break;
+                        }
+                    }
+
+                    if (isinDatabase)
+                    {
+                        if (user.Name == args.Parameters[0])
+                        {
+                            ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(79, 14, 102));
+                            ply.SendMessage("MobKills: " + user.MobKills, new Color(93, 18, 121));
+                            ply.SendMessage("PvPKills: " + user.PvPKills, new Color(104, 28, 131));
+                            ply.SendMessage("Deaths: " + user.Deaths, new Color(116, 35, 145));
+                            ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(124, 32, 158));
+                            ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(137, 33, 175));
+                            break;
+                        }
                     }
                 }
             }
