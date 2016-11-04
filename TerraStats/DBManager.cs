@@ -90,8 +90,7 @@ namespace TerraStats
                 {
                     try
                     {
-                        Console.WriteLine("Updating user: " + usr.Name);
-                        db.Query("UPDATE Users SET Deaths=@0, MobKills=@1, PvPKills=@2, DmgGiven=@3, DmgTaken=@4 WHERE UserID=@3",
+                        db.Query("UPDATE Users SET Deaths=@0, MobKills=@1, PvPKills=@2, DmgGiven=@3, DmgTaken=@4 WHERE UserID=@5",
                         user.Deaths,
                         user.MobKills,
                         user.PvPKills,
