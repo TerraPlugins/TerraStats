@@ -75,18 +75,18 @@ namespace TerraStats
 
                         TSPlayer victim = TShock.Players[victimid];
 
-                        foreach(TUser user in DbManager.Users)
+                        if (victim.IsLoggedIn)
                         {
-                            if(user.UserID == victim.User.ID)
+                            foreach (TUser user in DbManager.Users)
                             {
-                                if (victim.IsLoggedIn)
+                                if (user.UserID == victim.User.ID)
                                 {
                                     user.Deaths += 1;
                                     if (pvp)
                                     {
-                                        foreach(TUser usr in DbManager.Users)
+                                        foreach (TUser usr in DbManager.Users)
                                         {
-                                            if(usr.UserID == user.Killer.User.ID)
+                                            if (usr.UserID == user.Killer.User.ID)
                                             {
                                                 usr.PvPKills += 1;
                                                 DbManager.updateUser(usr);
@@ -96,7 +96,8 @@ namespace TerraStats
                                     DbManager.updateUser(user);
                                 }
                             }
-                        } 
+                        }
+                        
                     }
                     break;
                 case PacketTypes.PlayerDamage:
