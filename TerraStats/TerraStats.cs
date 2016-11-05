@@ -18,7 +18,7 @@ namespace TerraStats
         public override string Name { get { return "TerraStats"; } }
         public override string Author { get { return "Ryozuki"; } }
         public override string Description { get { return "A stats gatherer plugin"; } }
-        public override Version Version { get { return new Version(1, 0, 0); } }
+        public override Version Version { get { return new Version(1, 0, 0, 25); } }
         #endregion
 
         public static IDbConnection Db { get; private set; }
