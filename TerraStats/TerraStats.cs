@@ -209,12 +209,12 @@ namespace TerraStats
                 {
                     if (user.UserID == ply.User.ID)
                     {
-                        ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(79, 14, 102));
-                        ply.SendMessage("MobKills: " + user.MobKills, new Color(93, 18, 121));
-                        ply.SendMessage("PvPKills: " + user.PvPKills, new Color(104, 28, 131));
-                        ply.SendMessage("Deaths: " + user.Deaths, new Color(116, 35, 145));
-                        ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(124, 32, 158));
-                        ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(137, 33, 175));
+                        ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(30, 225, 212));
+                        ply.SendMessage("MobKills: " + user.MobKills, new Color(30, 225, 212));
+                        ply.SendMessage("PvPKills: " + user.PvPKills, new Color(30, 225, 212));
+                        ply.SendMessage("Deaths: " + user.Deaths, new Color(30, 225, 212));
+                        ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(30, 225, 212));
+                        ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(30, 225, 212));
                     }
                 }
             }
@@ -236,7 +236,7 @@ namespace TerraStats
 
                     if (!isinDatabase)
                     {
-                        ply.SendErrorMessage("[TerraPvP] Player not found.");
+                        ply.SendErrorMessage("[TerraStats] Player not found.");
                         return;
                     }
                 }
@@ -247,12 +247,12 @@ namespace TerraStats
                     {
                         if (user.UserID == fplayer[0].User.ID)
                         {
-                            ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(79, 14, 102));
-                            ply.SendMessage("MobKills: " + user.MobKills, new Color(93, 18, 121));
-                            ply.SendMessage("PvPKills: " + user.PvPKills, new Color(104, 28, 131));
-                            ply.SendMessage("Deaths: " + user.Deaths, new Color(116, 35, 145));
-                            ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(124, 32, 158));
-                            ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(137, 33, 175));
+                            ply.SendMessage("[TerraStats] Stats for: " + user.Name, new Color(30, 225, 212));
+                            ply.SendMessage("MobKills: " + user.MobKills, new Color(30, 225, 212));
+                            ply.SendMessage("PvPKills: " + user.PvPKills, new Color(30, 225, 212));
+                            ply.SendMessage("Deaths: " + user.Deaths, new Color(30, 225, 212));
+                            ply.SendMessage("Damage Given: " + user.DamageGiven, new Color(30, 225, 212));
+                            ply.SendMessage("Damage Taken: " + user.DamageRecieved, new Color(30, 225, 212));
                             break;
                         }
                     }
